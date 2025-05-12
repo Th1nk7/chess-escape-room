@@ -81,6 +81,9 @@ namespace m5
 
     bool begin(I2C_Class* i2c = nullptr, board_t board = board_t::board_unknown);
     bool init(I2C_Class* i2c = nullptr) { return begin(i2c); }
+    bool sleep(void);
+
+    void setClock(std::uint32_t freq);
 
     sensor_mask_t update(void);
 
@@ -135,6 +138,8 @@ namespace m5
     int32_t getOffsetData(size_t index);
 
     int16_t getRawData(size_t index);
+
+    IMU_Base* getImuInstancePtr(int idx) const { return _imu_instance[idx].get(); }
 
   private:
 

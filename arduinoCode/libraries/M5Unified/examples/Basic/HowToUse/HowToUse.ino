@@ -6,8 +6,15 @@
 // If you use SD card, write this.
 #include <SD.h>
 
+#if __has_include(<LittleFS.h>)
+// If you use LittleFS, write this.
+//  #include <LittleFS.h>
+#endif
+
+#if __has_include(<SPIFFS.h>)
 // If you use SPIFFS, write this.
-#include <SPIFFS.h>
+//  #include <SPIFFS.h>
+#endif
 
 #endif
 
@@ -81,6 +88,7 @@ void setup(void)
   cfg.external_speaker.hat_spk        = true;  // default=false. use HAT SPK
   cfg.external_speaker.hat_spk2       = true;  // default=false. use HAT SPK2
   cfg.external_speaker.atomic_spk     = true;  // default=false. use ATOMIC SPK
+  cfg.external_speaker.atomic_echo    = true;  // default=false. use ATOMIC ECHO BASE
   cfg.external_speaker.module_rca     = false; // default=false. use ModuleRCA AudioOutput
 
   // external display setting. (Pre-include required)
@@ -260,6 +268,9 @@ void setup(void)
   case m5::board_t::board_M5StackCoreS3:
     name = "StackCoreS3";
     break;
+  case m5::board_t::board_M5StackCoreS3SE:
+    name = "StackCoreS3SE";
+    break;
   case m5::board_t::board_M5StampS3:
     name = "StampS3";
     break;
@@ -272,6 +283,15 @@ void setup(void)
   case m5::board_t::board_M5AtomS3:
     name = "ATOMS3";
     break;
+  case m5::board_t::board_M5AtomS3R:
+    name = "ATOMS3R";
+    break;
+  case m5::board_t::board_M5AtomS3RCam:
+    name = "ATOMS3R Camera";
+    break;
+  case m5::board_t::board_M5AtomS3RExt:
+    name = "ATOMS3R Ext";
+    break;
   case m5::board_t::board_M5Dial:
     name = "Dial";
     break;
@@ -281,12 +301,25 @@ void setup(void)
   case m5::board_t::board_M5Capsule:
     name = "Capsule";
     break;
+  case m5::board_t::board_M5Cardputer:
+    name = "Cardputer";
+    break;
+  case m5::board_t::board_M5VAMeter:
+    name = "VAMeter";
+    break;
+  case m5::board_t::board_M5PaperS3:
+    name = "PaperS3";
+    break;
 #elif defined (CONFIG_IDF_TARGET_ESP32C3)
   case m5::board_t::board_M5StampC3:
     name = "StampC3";
     break;
   case m5::board_t::board_M5StampC3U:
     name = "StampC3U";
+    break;
+#elif defined (CONFIG_IDF_TARGET_ESP32C6)
+  case m5::board_t::board_M5NanoC6:
+    name = "NanoC6";
     break;
 #else
   case m5::board_t::board_M5Stack:
@@ -316,8 +349,14 @@ void setup(void)
   case m5::board_t::board_M5Station:
     name = "Station";
     break;
-  case m5::board_t::board_M5Atom:
-    name = "ATOM";
+  case m5::board_t::board_M5AtomLite:
+    name = "ATOM Lite";
+    break;
+  case m5::board_t::board_M5AtomMatrix:
+    name = "ATOM Matrix";
+    break;
+  case m5::board_t::board_M5AtomEcho:
+    name = "ATOM ECHO";
     break;
   case m5::board_t::board_M5AtomPsram:
     name = "ATOM PSRAM";
@@ -367,6 +406,11 @@ void setup(void)
   M5.Display.println(name);
   M5.Display.endWrite();
   M5_LOGI("imu:%s", name);
+
+  // You can instruct the bottom edge of the touchscreen to be treated as BtnA ~ BtnC by pixel number.
+  M5.setTouchButtonHeight(32);
+  // You can also specify the ratio to the screen height. (25 = 10% , 255 = 100%)
+  // M5.setTouchButtonHeightByRatio(25);
 }
 
 void loop(void)

@@ -1,53 +1,63 @@
-/*
-*******************************************************************************
-* Copyright (c) 2022 by M5Stack
-*                  Equipped with M5AtomS3 sample source code
-*                          配套  M5AtomS3 示例源代码
-* Visit for more information: https://docs.m5stack.com/en/unit/envIII
-* 获取更多资料请访问: https://docs.m5stack.com/zh_CN/unit/envIII
-*
-* Product: ENVIII_SHT30_QMP6988.  环境传感器
-* Date: 2023/2/12
-*******************************************************************************
-  Please connect to Port,Read temperature, humidity and atmospheric pressure and
-  display them on the display Serial
-  请连接端口,读取温度、湿度和大气压强并在显示屏上显示
-*/
-#include <M5AtomS3.h>
-#include "M5_ENV.h"
+/**
+ * @file ENV_III.ino
+ * @author SeanKwok (shaoxiang@m5stack.com)
+ * @brief
+ * @version 0.2
+ * @date 2024-07-18
+ *
+ *
+ * @Hardwares: M5AtomS3 + Unit ENV_III
+ * @Platform Version: Arduino M5Stack Board Manager v2.1.0
+ * @Dependent Library:
+ * M5UnitENV: https://github.com/m5stack/M5Unit-ENV
+ */
 
-SHT3X sht30(0x44, 2);
-QMP6988 qmp6988;
+#include "M5UnitENV.h"
 
-float tmp      = 0.0;
-float hum      = 0.0;
-float pressure = 0.0;
+SHT3X sht3x;
+QMP6988 qmp;
 
 void setup() {
-    M5.begin(true, true, false, false);  // Init M5AtomS3.  初始化M5AtomS3
-    Wire.begin(2, 1);                    // Initialize pin.  初始化引脚
-    qmp6988.init();
-    M5.Lcd.println(F("ENVIII Unit(SHT30 and QMP6988) test"));
-    USBSerial.println(F("ENVIII Unit(SHT30 and QMP6988) test"));
+    Serial.begin(115200);
+    if (!qmp.begin(&Wire, QMP6988_SLAVE_ADDRESS_L, 2, 1, 400000U)) {
+        while (1) {
+            Serial.println("Couldn't find QMP6988");
+            delay(500);
+        }
+    }
+
+    if (!sht3x.begin(&Wire, SHT3X_I2C_ADDR, 2, 1, 400000U)) {
+        while (1) {
+            Serial.println("Couldn't find SHT3X");
+            delay(500);
+        }
+    }
 }
 
 void loop() {
-    pressure = qmp6988.calcPressure();
-    if (sht30.get() == 0) {  // Obtain the data of shT30.  获取sht30的数据
-        tmp = sht30.cTemp;   // Store the temperature obtained from shT30.
-                             // 将sht30获取到的温度存储
-        hum = sht30.humidity;  // Store the humidity obtained from the SHT30.
-                               // 将sht30获取到的湿度存储
-    } else {
-        tmp = 0, hum = 0;
+    if (sht3x.update()) {
+        Serial.println("-----SHT3X-----");
+        Serial.print("Temperature: ");
+        Serial.print(sht3x.cTemp);
+        Serial.println(" degrees C");
+        Serial.print("Humidity: ");
+        Serial.print(sht3x.humidity);
+        Serial.println("% rH");
+        Serial.println("-------------\r\n");
     }
-    M5.Lcd.setCursor(0, 0);
-    M5.Lcd.clear();
-    M5.Lcd.printf(
-        "Temp: %2.1f  \r\nHumi: %2.0f%%  \r\nPressure:%2.0fPa\r\n---\n", tmp,
-        hum, pressure);
-    USBSerial.printf(
-        "Temp: %2.1f  \r\nHumi: %2.0f%%  \r\nPressure:%2.0fPa\r\n---\n", tmp,
-        hum, pressure);
-    delay(2000);
+
+    if (qmp.update()) {
+        Serial.println("-----QMP6988-----");
+        Serial.print(F("Temperature: "));
+        Serial.print(qmp.cTemp);
+        Serial.println(" *C");
+        Serial.print(F("Pressure: "));
+        Serial.print(qmp.pressure);
+        Serial.println(" Pa");
+        Serial.print(F("Approx altitude: "));
+        Serial.print(qmp.altitude);
+        Serial.println(" m");
+        Serial.println("-------------\r\n");
+    }
+    delay(1000);
 }

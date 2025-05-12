@@ -1,12 +1,12 @@
 /*
 *******************************************************************************
-* Copyright (c) 2021 by M5Stack
+* Copyright (c) 2023 by M5Stack
 *                  Equipped with M5StickC sample source code
 *                          配套  M5StickC 示例源代码
 * Visit for more information: https://docs.m5stack.com/en/core/m5stickc
 * 获取更多资料请访问: https://docs.m5stack.com/zh_CN/core/m5stickc
 *
-* Describe:  EEPROM Read & Write.
+* Describe: EEPROM Read & Write.
 * Date: 2021/7/30
 *******************************************************************************
   The values stored in the EEPROM will remain in the EEPROM even after the
@@ -29,8 +29,8 @@ void setup() {
     if (!EEPROM.begin(SIZE)) {  // Request storage of SIZE size(success return
                                 // 1).  申请SIZE大小的存储(成功返回1)
         Serial.println(
-            "\nFailed to initialise EEPROM!");  //串口输出格式化字符串.  Serial
-                                                // output format string
+            "\nFailed to initialise EEPROM!");  // 串口输出格式化字符串.  Serial
+                                                //  output format string
         delay(1000000);
     }
     Serial.println("\nRead data from EEPROM. Values are:");
@@ -54,7 +54,7 @@ void loop() {
                        // numbers from 0 to 255. Therefore, if you want to use
                        // EEPROM to store the numeric value read by the analog
                        // input pin, divide the numeric value by 4.
-            //将要存储于EEPROM的整数数值(EEPROM每一个存储地址可以储存一个字节，只能存储0-255的数.故如果要使用EEPROM存储模拟输入引脚所读取到的数值需要将该数值除以4)
+            // 将要存储于EEPROM的整数数值(EEPROM每一个存储地址可以储存一个字节，只能存储0-255的数.故如果要使用EEPROM存储模拟输入引脚所读取到的数值需要将该数值除以4)
             EEPROM.write(addr,
                          val);  // Writes the specified data to the specified
                                 // address.  向指定地址写入指定数据

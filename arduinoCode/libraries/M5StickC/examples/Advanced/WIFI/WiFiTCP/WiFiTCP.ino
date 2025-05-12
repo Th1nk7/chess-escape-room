@@ -1,12 +1,12 @@
 /*
 *******************************************************************************
-* Copyright (c) 2021 by M5Stack
+* Copyright (c) 2023 by M5Stack
 *                  Equipped with M5StickC sample source code
 *                          配套  M5StickC 示例源代码
 * Visit for more information: https://docs.m5stack.com/en/core/m5stickc
 * 获取更多资料请访问: https://docs.m5stack.com/zh_CN/core/m5stickc
 *
-* Describe:  WIFI TCP.
+* Describe: WIFI TCP.
 * Date: 2021/7/29
 *******************************************************************************
   M5StickC will sends a message to a TCP server
@@ -75,7 +75,7 @@ void loop() {
     int maxloops = 0;
 
     // wait for the server's reply to become available
-    //等待服务器的回复
+    // 等待服务器的回复
     while (!client.available() && maxloops < 1000) {
         maxloops++;
         delay(1);  // delay 1 msec

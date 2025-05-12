@@ -1,12 +1,12 @@
 /*
 *******************************************************************************
-* Copyright (c) 2021 by M5Stack
+* Copyright (c) 2023 by M5Stack
 *                  Equipped with M5StickC sample source code
 *                          配套  M5StickC 示例源代码
 * Visit for more information: https://docs.m5stack.com/en/core/m5stickc
 * 获取更多资料请访问: https://docs.m5stack.com/zh_CN/core/m5stickc
 *
-* Describe:  BasicHTTPClient.
+* Describe: BasicHTTPClient.
 * Date: 2021/8/4
 ******************************************************************************
 */
@@ -46,8 +46,8 @@ void loop() {
             if (httpCode ==
                 HTTP_CODE_OK) {  // file found at server.  在服务器上找到文件
                 String payload = http.getString();
-                Serial.println(payload);  //打印在服务器上读取的文件.  Print
-                                          // files read on the server
+                Serial.println(payload);  // 打印在服务器上读取的文件.  Print
+                                          //  files read on the server
             }
         } else {
             M5.Lcd.printf("[HTTP] GET... failed, error: %s\n",

@@ -35,15 +35,17 @@ private:
 
 public:
 	FlowSensor(uint16_t type ,uint8_t pin);
-	void begin(void (*userFunc)(void));
+	void begin(void (*userFunc)(void), bool pullup = false);
 	void count();
 	void read(long calibration = 0);
+	void setType(uint16_t type);
+	void setPin(uint8_t pin);
 	unsigned long getPulse();
-	void resetPulse();
 	float getFlowRate_h();
 	float getFlowRate_m();
 	float getFlowRate_s();
 	float getVolume();
+	void resetPulse();
 	void resetVolume();
 };
 

@@ -1,6 +1,6 @@
 /*
 *******************************************************************************
-* Copyright (c) 2021 by M5Stack
+* Copyright (c) 2023 by M5Stack
 *                  Equipped with M5StickC sample source code
 *                          配套  M5StickC 示例源代码
 * Visit for more information: https://docs.m5stack.com/en/core/m5stickc
@@ -50,8 +50,8 @@ void setup() {
 
 void loop() {
     uint16_t ir, red;
-    sensor.update();  //更新传感器读取到的数据
-    while (sensor.getRawValues(&ir, &red)) {  //如果获取到数据
+    sensor.update();  // 更新传感器读取到的数据
+    while (sensor.getRawValues(&ir, &red)) {  // 如果获取到数据
         M5.Lcd.setTextFont(4);
         M5.Lcd.setCursor(0, 20);
         M5.Lcd.printf("IR:%d            ", ir);

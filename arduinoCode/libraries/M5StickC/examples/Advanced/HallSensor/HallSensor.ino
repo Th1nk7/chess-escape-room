@@ -1,12 +1,12 @@
 /*
 *******************************************************************************
-* Copyright (c) 2021 by M5Stack
+* Copyright (c) 2023 by M5Stack
 *                  Equipped with M5StickC sample source code
 *                          配套  M5StickC 示例源代码
 * Visit for more information: https://docs.m5stack.com/en/core/m5stickc
 * 获取更多资料请访问: https://docs.m5stack.com/zh_CN/core/m5stickc
 *
-* Describe:  Hall sensor.  霍尔传感器
+* Describe: Hall sensor.  霍尔传感器
 * Date: 2021/7/27
 *******************************************************************************
   The ESP32 MCU has build in Hall sensor.  ESP32 MCU内置霍尔传感器
@@ -16,8 +16,8 @@
 */
 #include <M5StickC.h>
 
-#define HORIZONTAL_RESOLUTION 80   //屏幕水平分辨率
-#define VERTICAL_RESOLUTION   160  //屏幕竖直分辨率
+#define HORIZONTAL_RESOLUTION 80   // 屏幕水平分辨率
+#define VERTICAL_RESOLUTION   160  // 屏幕竖直分辨率
 #define POSITION_OFFSET_Y     20
 
 uint16_t oldSignal[HORIZONTAL_RESOLUTION];
@@ -52,7 +52,7 @@ void showSignal() {
     int x, y;
 
     for (n = 0; n < HORIZONTAL_RESOLUTION;
-         n++)  //在水平分辨率内,每个像素点根据计算得到的磁力大小绘制
+         n++)  // 在水平分辨率内,每个像素点根据计算得到的磁力大小绘制
     {  // Within the horizontal resolution, each pixel is drawn according to the
        // calculated magnetic force
         x = n;
@@ -66,7 +66,7 @@ void showSignal() {
         M5.Lcd.setCursor(0, 40);
         y = map(
             value, -127, 127, VERTICAL_RESOLUTION,
-            POSITION_OFFSET_Y);  //将value映射至-30~30的范围内,以免绘制超出屏幕
+            POSITION_OFFSET_Y);  // 将value映射至-30~30的范围内,以免绘制超出屏幕
 
         if (n > 0) {
             // delete old line element.  删除上次画的线

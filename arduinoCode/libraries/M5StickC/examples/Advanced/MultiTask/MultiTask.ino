@@ -1,12 +1,12 @@
 /*
 *******************************************************************************
-* Copyright (c) 2021 by M5Stack
+* Copyright (c) 2023 by M5Stack
 *                  Equipped with M5StickC sample source code
 *                          配套  M5StickC 示例源代码
 * Visit for more information: https://docs.m5stack.com/en/core/m5stickc
 * 获取更多资料请访问: https://docs.m5stack.com/zh_CN/core/m5stickc
 *
-* Describe:  MultiTask.  多线程
+* Describe: MultiTask.  多线程
 * Date: 2021/7/27
 *******************************************************************************
 */
@@ -48,7 +48,7 @@ void setup() {
     xTaskCreatePinnedToCore(
         task1,    // Function to implement the task.
                   // 线程对应函数名称(不能有返回值)
-        "task1",  //线程名称
+        "task1",  // 线程名称
         4096,     // The size of the task stack specified as the number of *
                   // bytes.任务堆栈的大小(字节)
         NULL,     // Pointer that will be used as the parameter for the task *

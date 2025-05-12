@@ -24,6 +24,10 @@
 #include "lgfx/v1/panel/Panel_M5HDMI.hpp"
 #include "M5GFX.h"
 
+#if defined (SDL_h_) || defined (CONFIG_IDF_TARGET_ESP32S3) || defined (CONFIG_IDF_TARGET_ESP32) || !defined (CONFIG_IDF_TARGET) 
+#define M5ATOMDISPLAY_ENABLED
+#endif
+
 #ifndef M5ATOMDISPLAY_LOGICAL_WIDTH
 #define M5ATOMDISPLAY_LOGICAL_WIDTH 1280
 #endif
@@ -100,7 +104,8 @@ public:
       return true;
     }
 
-#if !defined (CONFIG_IDF_TARGET_ESP32C3)
+#if defined (M5ATOMDISPLAY_ENABLED)
+#undef M5ATOMDISPLAY_ENABLED
 
 #if defined (SDL_h_)
     auto p = new lgfx::Panel_sdl();
@@ -143,9 +148,9 @@ public:
     int spi_miso = GPIO_NUM_22;
     int spi_sclk = GPIO_NUM_5;
 
-    std::uint32_t pkg_ver = lgfx::get_pkg_ver();
+    uint32_t pkg_ver = lgfx::get_pkg_ver();
 #if defined ( ESP_LOGD )
-    ESP_LOGD("LGFX","pkg:%d", pkg_ver);
+    ESP_LOGD("LGFX","pkg:%d", (int)pkg_ver);
 #endif
     switch (pkg_ver)
     {

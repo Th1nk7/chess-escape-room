@@ -14,6 +14,34 @@
 #undef setFont
 #endif
 
+#ifndef M5GFX_PORTA_DEFAULT_SDA
+ #if defined ( ARDUINO )
+  #define M5GFX_PORTA_DEFAULT_SDA SDA
+ #elif defined (CONFIG_IDF_TARGET_ESP32S3) || defined (CONFIG_IDF_TARGET_ESP32C6)
+  #define M5GFX_PORTA_DEFAULT_SDA 2
+ #elif defined (CONFIG_IDF_TARGET_ESP32C3)
+  #define M5GFX_PORTA_DEFAULT_SDA 1
+  #elif defined (CONFIG_IDF_TARGET_ESP32P4)
+  #define M5GFX_PORTA_DEFAULT_SDA 53
+ #else
+  #define M5GFX_PORTA_DEFAULT_SDA 21
+ #endif
+#endif
+
+#ifndef M5GFX_PORTA_DEFAULT_SCL
+ #if defined ( ARDUINO )
+  #define M5GFX_PORTA_DEFAULT_SCL SCL
+ #elif defined (CONFIG_IDF_TARGET_ESP32S3) || defined (CONFIG_IDF_TARGET_ESP32C6)
+  #define M5GFX_PORTA_DEFAULT_SCL 1
+ #elif defined (CONFIG_IDF_TARGET_ESP32C3)
+  #define M5GFX_PORTA_DEFAULT_SCL 0
+  #elif defined (CONFIG_IDF_TARGET_ESP32P4)
+  #define M5GFX_PORTA_DEFAULT_SCL 54
+ #else
+  #define M5GFX_PORTA_DEFAULT_SCL 22
+ #endif
+#endif
+
 #define LGFX_USE_V1
 #include "lgfx/v1/gitTagVersion.h"
 #include "lgfx/v1/platforms/device.hpp"
@@ -176,7 +204,6 @@ namespace m5gfx
 
     static M5GFX* getInstance(void) { return _instance; }
 
-    void clearDisplay(int32_t color = TFT_BLACK) { fillScreen(color); }
     void progressBar(int x, int y, int w, int h, uint8_t val);
     void pushState(void);
     void popState(void);
@@ -205,6 +232,14 @@ namespace m5gfx
                       , uint32_t pixel_clock    = 74250000
                       )
     {
+      (void)logical_width;
+      (void)logical_height;
+      (void)refresh_rate;
+      (void)output_width;
+      (void)output_height;
+      (void)scale_w;
+      (void)scale_h;
+      (void)pixel_clock;
 #if defined (__M5GFX_M5ATOMDISPLAY__) || defined (__M5GFX_M5MODULEDISPLAY__)
       auto board = getBoard();
       if (board == board_t::board_M5AtomDisplay || board == board_t::board_M5ModuleDisplay)

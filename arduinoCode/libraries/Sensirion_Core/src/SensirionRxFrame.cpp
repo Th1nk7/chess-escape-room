@@ -53,7 +53,7 @@ uint16_t SensirionRxFrame::getUInt32(uint32_t& data) {
 }
 
 uint16_t SensirionRxFrame::getInt32(int32_t& data) {
-    uint32_t ret;
+    uint32_t ret = 0;
     uint16_t error = getUInt32(ret);
     data = static_cast<int32_t>(ret);
     return error;
@@ -70,7 +70,7 @@ uint16_t SensirionRxFrame::getUInt16(uint16_t& data) {
 }
 
 uint16_t SensirionRxFrame::getInt16(int16_t& data) {
-    uint16_t ret;
+    uint16_t ret = 0;
     uint16_t error = getUInt16(ret);
     data = static_cast<int16_t>(ret);
     return error;
@@ -107,7 +107,7 @@ uint16_t SensirionRxFrame::getFloat(float& data) {
     union {
         uint32_t uInt32Data;
         float floatData;
-    } convert;
+    } convert = {0};
     uint16_t error = getUInt32(convert.uInt32Data);
     data = convert.floatData;
     return error;
@@ -126,4 +126,28 @@ uint16_t SensirionRxFrame::getBytes(uint8_t data[], size_t maxBytes) {
     }
     _numBytes -= readAmount;
     return NoError;
+}
+
+uint16_t SensirionRxFrame::getInteger(uint8_t* destination, IntegerType type,
+                                      uint8_t nrOfBytes) {
+
+    if (_numBytes < nrOfBytes) {
+        return RxFrameError | NoDataError;
+    }
+
+    if (nrOfBytes > type) {
+        return RxFrameError;
+    }
+
+    // pad missing bytes
+    uint8_t offset = type - nrOfBytes;
+    for (uint8_t i = 0; i < offset; i++) {
+        destination[type - i - 1] = 0;
+    }
+
+    for (uint8_t i = 1; i <= nrOfBytes; i++) {
+        destination[type - offset - i] = _buffer[_index++];
+    }
+
+    return 0;
 }

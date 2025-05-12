@@ -1,6 +1,6 @@
 /*
 *******************************************************************************
-* Copyright (c) 2021 by M5Stack
+* Copyright (c) 2023 by M5Stack
 *                  Equipped with M5StickC sample source code
 *                          配套  M5StickC 示例源代码
 * Visit for more information: https://docs.m5stack.com/en/core/m5stickc
@@ -16,8 +16,8 @@ red, green and blue 请连接端口,控制RGB单元滚动红、绿、蓝三种�
 #include <Adafruit_NeoPixel.h>
 #include <M5StickC.h>
 
-#define PIN       32  //定义NeoPixel的控制引脚
-#define NUMPIXELS 3   //定义NeoPixel控制灯灯数量
+#define PIN       32  // 定义NeoPixel的控制引脚
+#define NUMPIXELS 3   // 定义NeoPixel控制灯灯数量
 
 Adafruit_NeoPixel pixels = Adafruit_NeoPixel(
     NUMPIXELS, PIN,

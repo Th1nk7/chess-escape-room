@@ -1,6 +1,6 @@
 /*
 *******************************************************************************
-* Copyright (c) 2021 by M5Stack
+* Copyright (c) 2023 by M5Stack
 *                  Equipped with M5StickC sample source code
 *                          配套  M5StickC 示例源代码
 * Visit for more information: https://docs.m5stack.com/en/core/m5stickc
@@ -32,7 +32,7 @@ void setup() {
 void loop() {
     M5.Lcd.setCursor(22, 23);
     if (!mfrc522.PICC_IsNewCardPresent() ||
-        !mfrc522.PICC_ReadCardSerial()) {  //如果没有读取到新的卡片
+        !mfrc522.PICC_ReadCardSerial()) {  // 如果没有读取到新的卡片
         delay(200);
         return;
     }

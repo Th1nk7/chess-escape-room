@@ -1,12 +1,12 @@
 /*
 *******************************************************************************
-* Copyright (c) 2021 by M5Stack
+* Copyright (c) 2023 by M5Stack
 *                  Equipped with M5StickC sample source code
 *                          配套  M5StickC 示例源代码
 * Visit for more information: https://docs.m5stack.com/en/core/m5stickc
 * 获取更多资料请访问: https://docs.m5stack.com/zh_CN/core/m5stickc
 *
-* Describe:  MQTT.
+* Describe: MQTT.
 * Date: 2021/11/5
 *******************************************************************************
 */
@@ -50,7 +50,7 @@ void loop() {
     client.loop();  // This function is called periodically to allow clients to
                     // process incoming messages and maintain connections to the
                     // server.
-    //定期调用此函数，以允许主机处理传入消息并保持与服务器的连接
+    // 定期调用此函数，以允许主机处理传入消息并保持与服务器的连接
 
     unsigned long now =
         millis();  // Obtain the host startup duration.  获取主机开机时长

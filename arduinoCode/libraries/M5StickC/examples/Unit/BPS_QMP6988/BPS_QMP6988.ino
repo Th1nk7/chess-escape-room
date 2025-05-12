@@ -1,6 +1,6 @@
 /*
 *******************************************************************************
-* Copyright (c) 2021 by M5Stack
+* Copyright (c) 2023 by M5Stack
 *                  Equipped with M5StickC sample source code
 *                          配套  M5StickC 示例源代码
 * Visit for more information: https://docs.m5stack.com/en/core/m5stickc
@@ -14,7 +14,7 @@ the display screen 请连接端口A(33、32),读取大气压强并在显示屏�
 */
 #include <M5StickC.h>
 
-#include "UNIT_ENV.h"
+#include "M5_ENV.h"
 #include "Wire.h"  //The BPS uses I2C comunication.
 
 QMP6988 qmp6988;

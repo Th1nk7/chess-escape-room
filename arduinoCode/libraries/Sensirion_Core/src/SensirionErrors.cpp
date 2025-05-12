@@ -55,6 +55,10 @@ void errorToString(uint16_t error, char errorMessage[],
             break;
         case HighLevelError::WriteError:
             switch (lowLevelError) {
+                case LowLevelError::Undefined:
+                    strncpy(errorMessage, "Write error",
+                            errorMessageSize);
+                    return;
                 case LowLevelError::SerialWriteError:
                     strncpy(errorMessage, "Error writing to serial",
                             errorMessageSize);
@@ -81,6 +85,9 @@ void errorToString(uint16_t error, char errorMessage[],
             break;
         case HighLevelError::ReadError:
             switch (lowLevelError) {
+                case LowLevelError::Undefined:
+                    strncpy(errorMessage, "Read error", errorMessageSize);
+                    return;
                 case LowLevelError::NonemptyFrameError:
                     strncpy(errorMessage, "Frame already contains data",
                             errorMessageSize);
@@ -97,9 +104,7 @@ void errorToString(uint16_t error, char errorMessage[],
                     strncpy(errorMessage, "Wrong CRC found", errorMessageSize);
                     return;
                 case LowLevelError::WrongNumberBytesError:
-                    strncpy(errorMessage,
-                            "The number of bytes to be read are "
-                            "not a multiple of 3",
+                    strncpy(errorMessage, "Number of bytes not a multiple of 3",
                             errorMessageSize);
                     return;
                 case LowLevelError::NotEnoughDataError:
@@ -107,11 +112,8 @@ void errorToString(uint16_t error, char errorMessage[],
                             errorMessageSize);
                     return;
                 case LowLevelError::InternalBufferSizeError:
-                    strncpy(
-                        errorMessage,
-                        "Can't execute this command on this board, internal "
-                        "I2C buffer is too small",
-                        errorMessageSize);
+                    strncpy(errorMessage, "Internal I2C buffer too small",
+                            errorMessageSize);
                     return;
             }
             break;
@@ -122,6 +124,9 @@ void errorToString(uint16_t error, char errorMessage[],
         }
         case HighLevelError::TxFrameError:
             switch (lowLevelError) {
+                case LowLevelError::Undefined:
+                    strncpy(errorMessage, "Tx frame error", errorMessageSize);
+                    return;
                 case LowLevelError::BufferSizeError:
                     strncpy(errorMessage, "Not enough space in buffer",
                             errorMessageSize);
@@ -130,6 +135,9 @@ void errorToString(uint16_t error, char errorMessage[],
             break;
         case HighLevelError::RxFrameError:
             switch (lowLevelError) {
+                case LowLevelError::Undefined:
+                    strncpy(errorMessage, "Rx frame error", errorMessageSize);
+                    return;
                 case LowLevelError::BufferSizeError:
                     strncpy(errorMessage, "Not enough space in buffer",
                             errorMessageSize);
