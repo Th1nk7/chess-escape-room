@@ -3,12 +3,21 @@ let classStage = new Stages();
 
 function setup() {
   createCanvas(windowWidth-1, windowHeight-1);
+  mqttConfigure('wss://mqtt.nextservices.dk');
 }
 
 function draw() {
  background(220);
 
-  switch (stage) {
+
+  // Du er velkommen til at beholde det gamle, hvis du foretrækker det
+  if (stage && stage < 7 && stage > 0) {
+  classStage[`stage${stage}`]();
+  } else {
+    classStage.defaultStage();
+  }
+  
+  /*switch (stage) {
     case 1:
       classStage.stage1();
       break;
@@ -30,13 +39,14 @@ function draw() {
     default:
       classStage.defaultStage();
       break;
-  }
+    
+  }*/
 
   // For debugging
   fill(0);
   textAlign(LEFT);
   textSize(20);
-  text("Stage: " + stage, 10, 20);
+  text(`Stage: ${stage}`, 10, 20);
 }
 
 function touchStarted() { // Denne funktion bruger vi til alt der har noget at gøre med at man rør skærmen
@@ -51,6 +61,14 @@ function touchStarted() { // Denne funktion bruger vi til alt der har noget at g
     ) {
         stage++; // Går videre til næste stage
     }
-
+    // event.preventDefault(); Alternativ metode til at forhindre standard touch-adfærd
     return false; // Forhindrer standard touch-adfærd (Som scroll, zoom, klik og markering osv.)
+}
+
+function mqttConfigure(address) {
+  var client = mqtt.connect(address);
+
+  client.on('connect', function(s) {
+    console.log(`${s} Connected successfully to MQTT broker`)
+  })
 }

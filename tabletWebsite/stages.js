@@ -40,7 +40,7 @@ class Stages{
 
         // For det er muligt at trykke på skærmen for at komme videre
         if(keyIsPressed){
-            this.clickToProseedToggle();
+            this.clickToProceedToggle();
         }
     }
 
