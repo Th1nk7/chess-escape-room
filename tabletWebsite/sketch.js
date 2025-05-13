@@ -1,4 +1,4 @@
-let stage = 1;
+let stage = 4
 let classStage = new Stages();
 
 function setup() {
@@ -18,6 +18,15 @@ function draw() {
     case 3:
       classStage.stage3();
       break;
+    case 4:
+      classStage.stage4();
+      break;
+    case 5:
+      classStage.stage5();
+      break;
+    case 6:
+      classStage.stage6();
+      break;
     default:
       classStage.defaultStage();
       break;
@@ -34,12 +43,14 @@ function touchStarted() { // Denne funktion bruger vi til alt der har noget at g
   console.log("Just ran touchStarted")
 
   // Denne del er til at gå videre til næste stage, på de stager vi vil have det er muligt på
-    if (stage === 1) { // Stage 1
+    if (
+      stage === 1 ||
+      stage === 2 ||
+      stage === 4 ||
+      stage === 5
+    ) {
         stage++; // Går videre til næste stage
-    } 
-    else if (stage === 2) { // Stage 2
-        stage++; 
-    } //add alle andre som også skal have det, her
+    }
 
     return false; // Forhindrer standard touch-adfærd (Som scroll, zoom, klik og markering osv.)
 }
