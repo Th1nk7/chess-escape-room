@@ -1,38 +1,29 @@
 const int hallPin[12] = {
-  13, // D13
-  12, // D12
-  14, // D14
-  27, // D27
-  26, // D26
-  25, // D25
-  33, // D33
-  32, // D32
-  15, // D15
-  2,  // D2
-  4,  // D4
-  5   // D5
+  13, 23, 14, 27, 26, 25, 33, 32, 15, 22, 4, 5
 };
+
+int previousState[12];
 
 void setup() {
   Serial.begin(115200);
   for (int i = 0; i < 12; i++) {
-    pinMode(hallPin[i], INPUT_PULLUP);  // Internal pull-up used (no external resistors)
+    pinMode(hallPin[i], INPUT_PULLUP);
+    previousState[i] = digitalRead(hallPin[i]); // Initialize with current state
   }
   Serial.println("Hall-effect sensor test started...");
 }
 
 void loop() {
   for (int i = 0; i < 12; i++) {
-    int state = digitalRead(hallPin[i]);
-
-    if (state == HIGH) {
-      Serial.println("Magnet detected!");
-      Serial.print(i+1);
-    } else {
-      Serial.println("No magnet.");
-      Serial.print(i+1);
+    int currentState = digitalRead(hallPin[i]);
+    if (currentState != previousState[i]) {
+      Serial.print("State: ");
+      Serial.print(currentState);
+      Serial.print(" GPIO-PIN: ");
+      Serial.println(hallPin[i]);
+      previousState[i] = currentState;
     }
   }
 
-  delay(500);  // Delay for readability
+  delay(50); // Faster polling since we're now only printing on change
 }
