@@ -3,7 +3,6 @@ let classStage = new Stages();
 
 function setup() {
   createCanvas(windowWidth-1, windowHeight-1);
-  mqttConfigure('wss://mqtt.nextservices.dk');
 }
 
 function draw() {
@@ -63,12 +62,4 @@ function touchStarted() { // Denne funktion bruger vi til alt der har noget at g
     }
     // event.preventDefault(); Alternativ metode til at forhindre standard touch-adfærd
     return false; // Forhindrer standard touch-adfærd (Som scroll, zoom, klik og markering osv.)
-}
-
-function mqttConfigure(address) {
-  var client = mqtt.connect(address);
-
-  client.on('connect', function(s) {
-    console.log(`${s} Connected successfully to MQTT broker`)
-  })
 }
