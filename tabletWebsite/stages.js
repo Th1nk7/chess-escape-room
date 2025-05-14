@@ -51,9 +51,10 @@ class Stages{
         textAlign(CENTER);
         fill(0);
         textSize(50);
-        textFont("Xolonium");
+        textFont("Petit Formal Script");
         text("Tårnets Hemmelighed", width/2, height/2);
 
+        textFont("Times new roman")
         this.pressNextStage(50)
     }
 
@@ -63,9 +64,10 @@ class Stages{
         textAlign(CENTER);
         fill(0);
         textSize(50);
-        textFont("Xolonium");
-        text("Den, der løser Tårnets fire prøver, vil kende sandheden og åbne det, som aldrig burde åbnes.", width/2, height/2, width-110);
-
+        textFont("Petit Formal Script");
+        text("Den, der løser Tårnets fire prøver, vil kende sandheden og åbne det, som aldrig burde åbnes.", width/2, height/2-100, width-110);
+        
+        textFont("Times new roman")
         this.pressNextStage(150)
     }
 
@@ -75,7 +77,7 @@ class Stages{
         textAlign(CENTER);
         fill(0);
         textSize(50);
-        textFont("Xolonium");
+        textFont("Petit Formal Script");
         text("Nu er rummet tilrådighed. Vis dit hvær og lav skakmat.", width/2, height/2,width-110);
 
         
@@ -90,9 +92,10 @@ class Stages{
         textAlign(CENTER);
         fill(0);
         textSize(50);
-        textFont("Xolonium");
+        textFont("Petit Formal Script");
         text("Godt klaret! I har løst gåden!", width/2, height/2,width-110);
 
+        textFont("Times new roman")
         this.pressNextStage(100)
     }
 
@@ -102,9 +105,10 @@ class Stages{
         textAlign(CENTER);
         fill(0);
         textSize(50);
-        textFont("Xolonium");
+        textFont("Petit Formal Script");
         text("Løsningen til næste gåde ligger i at vide hvordan brikkerne rykker sig.", width/2, height/2,width-110);
 
+        textFont("Times new roman")
         this.pressNextStage(150)
     }
 
@@ -114,8 +118,8 @@ class Stages{
         textAlign(CENTER);
         fill(0);
         textSize(50);
-        textFont("Xolonium");
-        text("Kan du bevæge dig som den brik du lige har rykket? *Her* ville være et godt sted og starte.", width/2, height/2,width-110);
+        textFont("Petit Formal Script");
+        text("Kan du bevæge dig som den brik du lige har rykket? *Her* ville være et godt sted og starte.", width/2, height/2-50,width-110);
 
         textSize(20)
         textFont("Arial")
@@ -145,9 +149,10 @@ class Stages{
         textAlign(CENTER);
         fill(0);
         textSize(50);
-        textFont("Xolonium");
+        textFont("Petit Formal Script");
         text("Godt klaret! Tallet 275 var rigtigt.", width/2, height/2,width-110);
 
+        textFont("Times new roman")
         this.pressNextStage(100)
     }
 
@@ -157,9 +162,10 @@ class Stages{
         textAlign(CENTER);
         fill(0);
         textSize(50);
-        textFont("Xolonium");
-        text("HUSK tallet til næste gåde, det er summen!", width/2, height/2,width-110);
+        textFont("Petit Formal Script");
+        text("HUSK tallet til næste gåde, det er summen!", width/2, height/2-50,width-110);
 
+        textFont("Times new roman")
         this.pressNextStage(100)
     }
 
@@ -169,7 +175,7 @@ class Stages{
         textAlign(CENTER);
         fill(0);
         textSize(50);
-        textFont("Xolonium");
+        textFont("Petit Formal Script");
         text("Kan du finde x?", width/2, height/6,width-110);
 
         textFont("Arial")
@@ -210,9 +216,10 @@ class Stages{
         textAlign(CENTER);
         fill(0);
         textSize(50);
-        textFont("Xolonium");
+        textFont("Petit Formal Script");
         text("Godt klaret! Ja x var 10", width/2, height/2,width-110);
 
+        textFont("Times new roman")
         this.pressNextStage(100)
     }
 
@@ -222,9 +229,10 @@ class Stages{
         textAlign(CENTER);
         fill(0);
         textSize(50);
-        textFont("Xolonium");
+        textFont("Petit Formal Script");
         text("Er du klar til at opklare mysteriet om Tårnets Hemmelighed?", width/2, height/2,width-110);
 
+        textFont("Times new roman")
         this.pressNextStage(140)
     }
 
@@ -234,7 +242,7 @@ class Stages{
         textAlign(CENTER);
         fill(0);
         textSize(50);
-        textFont("Xolonium");
+        textFont("Petit Formal Script");
         text("GÅDE 4", width/2, height/2,width-110);
 
         //Her er Gåde 4, aka. mønster gåden
@@ -246,9 +254,10 @@ class Stages{
         textAlign(CENTER);
         fill(0);
         textSize(50);
-        textFont("Xolonium");
-        text("Godt klaret! Du fandt talene gemt i mønsteret!", width/2, height/2,width-110);
+        textFont("Petit Formal Script");
+        text("Godt klaret! Du fandt talene gemt i mønsteret!", width/2, height/2-50,width-110);
 
+        textFont("Times new roman")
         this.pressNextStage(100)
     }
 
@@ -258,9 +267,10 @@ class Stages{
         textAlign(CENTER);
         fill(0);
         textSize(50);
-        textFont("Xolonium");
-        text("Tårnets hemmelig er dens alder, som du fandt. 27", width/2, height/2,width-110);
-
+        textFont("Petit Formal Script");
+        text("Tårnets hemmelig er dens alder, som du fandt. 27", width/2, height/2-50,width-110);
+        
+        textFont("Times new roman")
         this.pressNextStage(100)
     }
 
@@ -270,7 +280,7 @@ class Stages{
         textAlign(CENTER);
         fill(0);
         textSize(50);
-        textFont("Xolonium");
+        textFont("Petit Formal Script");
         text("Nu skal du bare sætte startbrikken tilbage", width/2, height/2,width-110);
         
         initChessboard(3,() => stage++)
@@ -282,7 +292,7 @@ class Stages{
         textAlign(CENTER);
         fill(0);
         textSize(50);
-        textFont("Xolonium");
+        textFont("Petit Formal Script");
         text("Escape Room Løst!", width/2, height/2,width-110);
     }
 
