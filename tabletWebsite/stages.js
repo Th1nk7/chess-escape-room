@@ -82,9 +82,6 @@ class Stages{
         initChessboard(1, () => {
             stage++
         });
-        //TOBI KIG her: Sørg her for den siger stage++ når gåde 1 er løst og sender mqtt ting
-
-
     }
 
     stage4(){
