@@ -1,11 +1,19 @@
 class Stages{
 
     constructor(){
-        this.inputFelt
-        this.submitButton
         this.rigtigForkertTekst = ""
         this.tekstColor = [0,0,0]
-        this.timeOut
+        this.timeOut = false
+
+        //Laver et input felt 
+        this.inputFelt = createInput();
+        this.inputFelt.position(width / 2 - 100, height / 2 + 150); // Adjust position
+        this.inputFelt.hide()
+        //Laver submit knap
+        this.submitButton = createButton("Bekræft svar");
+        this.submitButton.mousePressed(() => this.checkAnswer());
+        this.submitButton.position(width / 2 - 50, height / 2 + 180);
+        this.submitButton.hide()
     }
 
     /*
@@ -115,19 +123,17 @@ class Stages{
         fill(this.tekstColor[0],this.tekstColor[1],this.tekstColor[2])
         text(this.rigtigForkertTekst,width/2,height-100)
 
-        //Laver et input felt 
-        if (!this.inputFelt) {
-            this.inputFelt = createInput(); // p5.js function to create an input field
+        
+            this.inputFelt.show()
             this.inputFelt.position(width / 2 - 100, height / 2 + 150); // Adjust position
             this.inputFelt.size(200); // Set size of the input field
             this.inputFelt.attribute("placeholder", "Skriv dit svar her"); // Add placeholder text
-        }
-
-        //Laver submit knap
-        if (!this.submitButton) {
-            this.submitButton = createButton("Bekræft svar");
+        
+       
+        if(!this.timeOut){
+            this.submitButton.show()
             this.submitButton.position(width / 2 - 50, height / 2 + 180);
-            this.submitButton.mousePressed(() => this.checkAnswer());
+            this.inputFelt.value('')
         }
     }
 
@@ -179,60 +185,86 @@ class Stages{
         fill(this.tekstColor[0],this.tekstColor[1],this.tekstColor[2])
         text(this.rigtigForkertTekst,width/2,height-100)
 
-        //Laver et input felt 
-        if (this.inputFelt == null) {
-            this.inputFelt = createInput(); // p5.js function to create an input field
+            this.inputFelt.show()
             this.inputFelt.position(width / 2 - 100, height / 2 + 150); // Adjust position
             this.inputFelt.size(30); // Set size of the input field
             this.inputFelt.attribute("placeholder", "x"); // Add placeholder text
-        }
-
-        //Laver submit knap
-        if (!this.submitButton) {
-            this.submitButton = createButton("Bekræft svar");
+            
+       
+        if(!this.timeOut){
+            this.submitButton.show()
             this.submitButton.position(width / 2 - 50, height / 2 + 180);
-            this.submitButton.mousePressed(() => this.checkAnswer());
+            this.inputFelt.value('')
         }
-
     }
 
 
     checkAnswer() {
         const userAnswer = this.inputFelt.value();
         console.log("Brugerens svar:", userAnswer);
+
+        //Stage 6 (Gåde 2)
         if (userAnswer === "275" && stage === 6) { // === korrekt svar
             console.log("Rigtigt svar!");
             this.tekstColor = [0,255,0]
             this.rigtigForkertTekst = "Rigtigt svar!"
+            tegn()
             this.submitButton.hide()
-            if(!this.timeOut){
-            this.timeOut = setTimeout(() => {stage++; this.submitButton = null; this.inputFelt.hide();this.rigtigForkertTekst = ""}, 3000)
-            }
+            if(this.timeOut == false){
+            this.timeOut = setTimeout(() => {
+                this.inputFelt.hide();
+                this.rigtigForkertTekst = ""
+                this.timeOut = false;
+                stage++;
+                tegn()
+            }, 3000);
+        }
         } else if(stage === 6){
             console.log("Forkert svar, prøv igen.");
             this.tekstColor = [255,0,0]
             this.rigtigForkertTekst = "Forkert svar, prøv igen."
-            this.submitButton.hide() 
-            if(!this.timeOut){
-            this.timeOut = setTimeout(() => {this.rigtigForkertTekst = ""; this.timeOut = null;this.submitButton.show()}, 3000)
+            tegn()
+            this.submitButton.hide()
+            if(this.timeOut == false){
+            this.timeOut = setTimeout(() => {
+                this.rigtigForkertTekst = "";
+                this.timeOut = false;
+                this.submitButton.show()
+                tegn()
+            }, 3000);
             }
         }
 
+
+        //Stage 9 (Gåde 3)
         if (userAnswer === "10" && stage === 9) { // === korrekt svar
             console.log("Rigtigt svar!");
             this.tekstColor = [0,255,0]
-            this.rigtigForkertTekst = "Rigtigt svar! X er 10"
+            this.rigtigForkertTekst = "Rigtigt svar!"
+            tegn()
             this.submitButton.hide()
-            if(!this.timeOut){
-            this.timeOut = setTimeout(() => {stage++; this.submitButton = null; this.inputFelt = null;this.rigtigForkertTekst = ""}, 3000)
-            }
+            if(this.timeOut == false){
+            this.timeOut = setTimeout(() => {
+                this.inputFelt.hide();
+                this.rigtigForkertTekst = ""
+                this.timeOut = false;
+                stage++;
+                tegn()
+            }, 3000);
+        }
         } else if(stage === 9){
-            console.log("Forkert svar, prøv igen. Hvad er X?");
+            console.log("Forkert svar, prøv igen.");
             this.tekstColor = [255,0,0]
-            this.rigtigForkertTekst = "Forkert, prøv igen. Hvad er X?"
+            this.rigtigForkertTekst = "Forkert svar, prøv igen."
+            tegn()
             this.submitButton.hide()
-            if(!this.timeOut){
-            this.timeOut = setTimeout(() => {this.rigtigForkertTekst = ""; this.timeOut = null;this.submitButton.show()}, 3000)
+            if(this.timeOut == false){
+            this.timeOut = setTimeout(() => {
+                this.rigtigForkertTekst = "";
+                this.timeOut = false;
+                this.submitButton.show()
+                tegn()
+            }, 3000);
             }
         }
     }
