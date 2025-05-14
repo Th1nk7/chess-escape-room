@@ -1,4 +1,4 @@
-let stage = 16
+let stage = 1
 let classStage
 
 function setup() {

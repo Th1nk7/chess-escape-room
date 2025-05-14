@@ -272,6 +272,8 @@ class Stages{
         textSize(50);
         textFont("Xolonium");
         text("Nu skal du bare sætte startbrikken tilbage", width/2, height/2,width-110);
+        
+        initChessboard(3,() => stage++)
     }
 
     stage16(){
