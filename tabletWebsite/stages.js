@@ -5,6 +5,7 @@ class Stages{
         this.submitButton
         this.rigtigForkertTekst = ""
         this.tekstColor = [0,0,0]
+        this.timeOut
     }
 
     /*
@@ -20,6 +21,11 @@ class Stages{
         rect(width/2,height/2, width-100, height-100);
     }
 
+    pressNextStage(offset){
+        textSize(20);
+        text(`"Tryk på skærmen for at komme videre"`, width/2, height/2 + offset);
+    }
+
     defaultStage(){
         fill(100)
         rectMode(CORNER);
@@ -28,7 +34,7 @@ class Stages{
         fill(0)
         textAlign(CENTER);
         textSize(30)
-        text("Det her er default stage. Når det stage er på en der ikke findes.", width/2, height/2);
+        text("Det her er default stage. Når det stage er på, en der ikke findes.", width/2, height/2);
     }
 
     stage1(){ //Beskrivelse: Start side når delatgerne kommer ind i rummet.
@@ -40,13 +46,7 @@ class Stages{
         textFont("Xolonium");
         text("Tårnets Hemmelighed", width/2, height/2);
 
-        textSize(20);
-        text(`"Tryk på skærmen for at komme videre"`, width/2, height/2 + 50);
-
-        // For det er muligt at trykke på skærmen for at komme videre
-        if(keyIsPressed){
-            this.clickToProceedToggle();
-        }
+        this.pressNextStage(50)
     }
 
     stage2(){ //Beskrivelse: Tekst side til at introducere escape roomet
@@ -58,12 +58,11 @@ class Stages{
         textFont("Xolonium");
         text("Den, der løser Tårnets fire prøver, vil kende sandheden og åbne det, som aldrig burde åbnes.", width/2, height/2, width-110);
 
-        textSize(20);
-        text(`"Tryk på skærmen for at komme videre"`, width/2, height/2 + 150);
+        this.pressNextStage(150)
     }
 
     stage3(){ //Beskrivelse: Hint til gåde 1. Plus når deltagerne løser gåde 1, så går den videre til næste stage
-        this.drawBackBox(70,0,130)
+        this.drawBackBox(227,85,232)
 
         textAlign(CENTER);
         fill(0);
@@ -87,8 +86,7 @@ class Stages{
         textFont("Xolonium");
         text("Godt klaret! I har løst gåden!", width/2, height/2,width-110);
 
-        textSize(20);
-        text(`"Tryk på skærmen for at komme videre"`, width/2, height/2 + 100);
+        this.pressNextStage(100)
     }
 
     stage5(){
@@ -100,12 +98,11 @@ class Stages{
         textFont("Xolonium");
         text("Løsningen til næste gåde ligger i at vide hvordan brikkerne rykker sig.", width/2, height/2,width-110);
 
-        textSize(20);
-        text(`"Tryk på skærmen for at komme videre"`, width/2, height/2 + 150);
+        this.pressNextStage(150)
     }
 
     stage6(){
-        this.drawBackBox(70,0,130)
+        this.drawBackBox(227,85,232)
 
         textAlign(CENTER);
         fill(0);
@@ -141,10 +138,9 @@ class Stages{
         fill(0);
         textSize(50);
         textFont("Xolonium");
-        text("Godt klaret!", width/2, height/2,width-110);
+        text("Godt klaret! Talene 275 var rigtigt.", width/2, height/2,width-110);
 
-        textSize(20);
-        text(`"Tryk på skærmen for at komme videre"`, width/2, height/2 + 100);
+        this.pressNextStage(100)
     }
 
     stage8(){
@@ -154,24 +150,90 @@ class Stages{
         fill(0);
         textSize(50);
         textFont("Xolonium");
-        text("Stage 8", width/2, height/2,width-110);
+        text("HUSK talene til næste gåde, det er summen!", width/2, height/2,width-110);
+
+        this.pressNextStage(100)
     }
+
+    stage9(){
+        this.drawBackBox(227,85,232)
+
+        textAlign(CENTER);
+        fill(0);
+        textSize(50);
+        textFont("Xolonium");
+        text("Kan du finde x?", width/2, height/6,width-110);
+
+        textFont("Arial")
+        textSize(20)
+        textAlign(LEFT)
+        text("y = x + 25",width/2,height/2-80)
+        text("t = 5x - 10",width/2,height/2-60)
+        text("g = 4x", width/2,height/2-40)
+        text("j = 165 - 2/x",width/2,height/2-20)
+
+        text("y + t + g + j = Summen",width/2,height/2+20)
+
+        textSize(20)
+        textFont("Arial")
+        fill(this.tekstColor[0],this.tekstColor[1],this.tekstColor[2])
+        text(this.rigtigForkertTekst,width/2,height-100)
+
+        //Laver et input felt 
+        if (this.inputFelt == null) {
+            this.inputFelt = createInput(); // p5.js function to create an input field
+            this.inputFelt.position(width / 2 - 100, height / 2 + 150); // Adjust position
+            this.inputFelt.size(30); // Set size of the input field
+            this.inputFelt.attribute("placeholder", "x"); // Add placeholder text
+        }
+
+        //Laver submit knap
+        if (!this.submitButton) {
+            this.submitButton = createButton("Bekræft svar");
+            this.submitButton.position(width / 2 - 50, height / 2 + 180);
+            this.submitButton.mousePressed(() => this.checkAnswer());
+        }
+
+    }
+
 
     checkAnswer() {
         const userAnswer = this.inputFelt.value();
         console.log("Brugerens svar:", userAnswer);
-        if (userAnswer === "123") { // === korrekt svar
+        if (userAnswer === "275" && stage === 6) { // === korrekt svar
             console.log("Rigtigt svar!");
             this.tekstColor = [0,255,0]
-            this.rigtigForkertTekst = "Rigtigt"
-
-            setTimeout(() => {stage++; this.submitButton.remove(); this.inputFelt.remove()}, 3000)
-        } else {
+            this.rigtigForkertTekst = "Rigtigt svar!"
+            this.submitButton.hide()
+            if(!this.timeOut){
+            this.timeOut = setTimeout(() => {stage++; this.submitButton = null; this.inputFelt.hide();this.rigtigForkertTekst = ""}, 3000)
+            }
+        } else if(stage === 6){
             console.log("Forkert svar, prøv igen.");
             this.tekstColor = [255,0,0]
-            this.rigtigForkertTekst = "Forkert"
+            this.rigtigForkertTekst = "Forkert svar, prøv igen."
+            this.submitButton.hide() 
+            if(!this.timeOut){
+            this.timeOut = setTimeout(() => {this.rigtigForkertTekst = ""; this.timeOut = null;this.submitButton.show()}, 3000)
+            }
+        }
 
-            setTimeout(() => this.rigtigForkertTekst = "", 3000)
+        if (userAnswer === "10" && stage === 9) { // === korrekt svar
+            console.log("Rigtigt svar!");
+            this.tekstColor = [0,255,0]
+            this.rigtigForkertTekst = "Rigtigt svar! X er 10"
+            this.submitButton.hide()
+            if(!this.timeOut){
+            this.timeOut = setTimeout(() => {stage++; this.submitButton = null; this.inputFelt = null;this.rigtigForkertTekst = ""}, 3000)
+            }
+        } else if(stage === 9){
+            console.log("Forkert svar, prøv igen. Hvad er X?");
+            this.tekstColor = [255,0,0]
+            this.rigtigForkertTekst = "Forkert, prøv igen. Hvad er X?"
+            this.submitButton.hide()
+            if(!this.timeOut){
+            this.timeOut = setTimeout(() => {this.rigtigForkertTekst = ""; this.timeOut = null;this.submitButton.show()}, 3000)
+            }
         }
     }
 }

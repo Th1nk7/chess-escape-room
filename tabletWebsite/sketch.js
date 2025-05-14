@@ -1,4 +1,4 @@
-let stage = 7
+let stage = 6
 let classStage = new Stages();
 
 function setup() {
@@ -10,36 +10,11 @@ function draw() {
 
 
   // Du er velkommen til at beholde det gamle, hvis du foretrækker det. Tak tobi, og nej
-  if (stage && stage <= 8 && stage > 0) {
+  if (stage && stage <= 9 && stage > 0) {
   classStage[`stage${stage}`]();
   } else {
     classStage.defaultStage();
   }
-  
-  /*switch (stage) {
-    case 1:
-      classStage.stage1();
-      break;
-    case 2:
-      classStage.stage2();
-      break;
-    case 3:
-      classStage.stage3();
-      break;
-    case 4:
-      classStage.stage4();
-      break;
-    case 5:
-      classStage.stage5();
-      break;
-    case 6:
-      classStage.stage6();
-      break;
-    default:
-      classStage.defaultStage();
-      break;
-    
-  }*/
 
   // For debugging
   fill(0);
@@ -57,7 +32,8 @@ function touchStarted() { // Denne funktion bruger vi til alt der har noget at g
       stage === 2 ||
       stage === 4 ||
       stage === 5 ||
-      stage === 7
+      stage === 7 ||
+      stage === 8
     ) {
         stage++; // Går videre til næste stage
     }
