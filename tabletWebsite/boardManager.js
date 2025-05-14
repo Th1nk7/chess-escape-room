@@ -17,9 +17,15 @@ client.on('message', function (topic, message) {
     message = message.toString();
     console.log("Message received: ", message);
     if (chessboard && chessboard.scenario === 1) {
+        console.log("Scernario 1")
+        /*if(message == "Scernario 1"){
+            chessboard.callback
+            
+        }*/
         // Scenario 1: Checkmate in 1 move
         // FUNCTIONLITY HERE
     } else if (chessboard && chessboard.scenario === 2) {
+        console.log("Scernario 1")
         // Scenario 2: Pattern formed after moving pieces
         // FUNCTIONLITY HERE
     } 
