@@ -1,45 +1,22 @@
-let stage = 7
-let classStage = new Stages();
+let stage = 1
+let classStage
 
 function setup() {
   createCanvas(windowWidth-1, windowHeight-1);
+  classStage = new Stages();
+  tegn()
 }
 
-function draw() {
+function tegn() {
  background(220);
 
 
   // Du er velkommen til at beholde det gamle, hvis du foretrækker det. Tak tobi, og nej
-  if (stage && stage <= 8 && stage > 0) {
-  classStage[`stage${stage}`]();
+  if (stage && stage <= 16 && stage > 0) {
+    classStage[`stage${stage}`]();
   } else {
     classStage.defaultStage();
   }
-  
-  /*switch (stage) {
-    case 1:
-      classStage.stage1();
-      break;
-    case 2:
-      classStage.stage2();
-      break;
-    case 3:
-      classStage.stage3();
-      break;
-    case 4:
-      classStage.stage4();
-      break;
-    case 5:
-      classStage.stage5();
-      break;
-    case 6:
-      classStage.stage6();
-      break;
-    default:
-      classStage.defaultStage();
-      break;
-    
-  }*/
 
   // For debugging
   fill(0);
@@ -57,9 +34,15 @@ function touchStarted() { // Denne funktion bruger vi til alt der har noget at g
       stage === 2 ||
       stage === 4 ||
       stage === 5 ||
-      stage === 7
+      stage === 7 ||
+      stage === 8 ||
+      stage === 10 ||
+      stage === 11 ||
+      stage === 13 ||
+      stage === 14
     ) {
-        stage++; // Går videre til næste stage
+        stage++;
+        tegn() // Går videre til næste stage
     }
     /*if(stage === 2){
       initChessboard(1,() => {console.log("Kage")})
