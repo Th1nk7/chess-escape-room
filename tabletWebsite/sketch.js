@@ -1,4 +1,4 @@
-let stage = 4
+let stage = 16
 let classStage
 
 function setup() {
@@ -12,7 +12,7 @@ function tegn() {
 
 
   // Du er velkommen til at beholde det gamle, hvis du foretrækker det. Tak tobi, og nej
-  if (stage && stage <= 9 && stage > 0) {
+  if (stage && stage <= 16 && stage > 0) {
     classStage[`stage${stage}`]();
   } else {
     classStage.defaultStage();
@@ -35,7 +35,11 @@ function touchStarted() { // Denne funktion bruger vi til alt der har noget at g
       stage === 4 ||
       stage === 5 ||
       stage === 7 ||
-      stage === 8
+      stage === 8 ||
+      stage === 10 ||
+      stage === 11 ||
+      stage === 13 ||
+      stage === 14
     ) {
         stage++;
         tegn() // Går videre til næste stage
