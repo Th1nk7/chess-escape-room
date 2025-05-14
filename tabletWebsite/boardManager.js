@@ -25,10 +25,14 @@ client.on('message', function (topic, message) {
         // Scenario 1: Checkmate in 1 move
         // FUNCTIONLITY HERE
     } else if (chessboard && chessboard.scenario === 2) {
-        console.log("Scernario 1")
+        console.log("Scernario 2")
         // Scenario 2: Pattern formed after moving pieces
         // FUNCTIONLITY HERE
-    } 
+    } else if (chessboard && chessboard.scenario === 3) {
+        console.log("Scernario 3")
+        // Scenario 3: Return magnet
+        // FUNCTIONLITY HERE
+    }
 });
 
 function initChessboard(scenario, callback) {
