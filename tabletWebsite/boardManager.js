@@ -170,7 +170,7 @@ function initChessboard(scenario, callback) {
         chessboard.callback = callback;
         chessboard.scenario = 2;
         chessboard.nextSensor = [32,33,13,26,4,5,14,22,27,25,15,23];
-        document.getElementById("chessboard").addClass('shown');
+        document.getElementById("chessboard").classList.add("shown");
         chessboard.board = new ChessBoard('chessboard', { a8: 'wr' });
         chessboard.lastPos = "a8";
         chessboard.trail = ['a8'];
