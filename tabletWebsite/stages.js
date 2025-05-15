@@ -78,7 +78,7 @@ class Stages{
         fill(0);
         textSize(50);
         textFont("Petit Formal Script");
-        text("Nu er rummet til rådighed. Vis dit værd, og lav skakmat.", width/2, height/2,width-110);
+        text("Nu er rummet til rådighed. Vis dit værd, og lav skakmat.", width/2, height/2-100,width-110);
 
         
         initChessboard(1, () => {
