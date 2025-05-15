@@ -404,7 +404,7 @@ class Stages{
                 this.rigtigForkertTekst = ""
                 this.timeOut = false;
                 stage = 13;
-                document.getElementById("chessboard").hidden = true
+                document.getElementById("chessboard").remove();
                 tegn();
 
             }, 3000);
