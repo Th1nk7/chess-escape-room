@@ -251,6 +251,17 @@ class Stages{
             tegn();
         });
 
+        if(!this.timeOut){
+            this.inputFelt.show()
+            this.inputFelt.position(width / 2- 50, height / 2 + 220); // Adjust position
+            this.inputFelt.size(60); // Set size of the input field
+            this.inputFelt.attribute("placeholder", "Mønster"); // Add placeholder text
+
+            this.submitButton.show()
+            this.submitButton.position(width / 2 - 50, height / 2 + 250);
+            this.inputFelt.value('')
+        }
+
     }
 
     stage13(){
@@ -360,6 +371,45 @@ class Stages{
             }, 3000);
         }
         } else if(stage === 9){
+            console.log("Forkert svar, prøv igen.");
+            this.tekstColor = color(255,0,0);
+            this.rigtigForkertTekst = "Forkert svar, prøv igen.";
+            tegn();
+            textAlign(CENTER);
+            this.submitButton.hide();
+            this.inputFelt.hide();
+            if(this.timeOut == false){
+            this.timeOut = setTimeout(() => {
+                this.rigtigForkertTekst = "";
+                this.timeOut = false;
+                this.submitButton.show();
+                this.inputFelt.show();
+                tegn();
+            }, 3000);
+            }
+        }
+    
+
+    //Stage 12 (Gåde 4)
+        if (userAnswer === "25" && stage === 12) { // === korrekt svar
+            console.log("Rigtigt svar!");
+            this.tekstColor = color(0,255,0);
+            this.rigtigForkertTekst = "Rigtigt svar!";
+            tegn();
+            textAlign(CENTER);
+            this.submitButton.hide();
+            this.inputFelt.hide();
+            if(this.timeOut == false){
+            this.timeOut = setTimeout(() => {
+                this.rigtigForkertTekst = ""
+                this.timeOut = false;
+                stage = 13;
+                document.getElementById("chessboard").classList.remove("shown")
+                tegn();
+
+            }, 3000);
+        }
+        } else if(stage === 12){
             console.log("Forkert svar, prøv igen.");
             this.tekstColor = color(255,0,0);
             this.rigtigForkertTekst = "Forkert svar, prøv igen.";
