@@ -2,14 +2,38 @@ let stage = 1
 let classStage
 
 function setup() {
-  createCanvas(windowWidth-1, windowHeight-1);
+  createCanvas(windowWidth, windowHeight);
   classStage = new Stages();
-  tegn()
+  tegn();
+  // Try to request fullscreen on initialization
+  requestFullscreen();
+}
+
+// Handle window resize events
+function windowResized() {
+  resizeCanvas(windowWidth, windowHeight);
+  tegn(); // Redraw everything with the new canvas size
+}
+
+// Function to request fullscreen mode
+function requestFullscreen() {
+  if (!document.fullscreenElement) {
+    const element = document.documentElement;
+    
+    if (element.requestFullscreen) {
+      element.requestFullscreen().catch(err => {
+        console.warn(`Error attempting to enable fullscreen: ${err.message}`);
+      });
+    } else if (element.webkitRequestFullscreen) { // Safari
+      element.webkitRequestFullscreen();
+    } else if (element.msRequestFullscreen) { // IE11
+      element.msRequestFullscreen();
+    }
+  }
 }
 
 function tegn() {
- background(220);
-
+  background(220);
 
   // Du er velkommen til at beholde det gamle, hvis du foretrækker det. Tak tobi, og nej
   if (stage && stage <= 16 && stage > 0) {
@@ -26,10 +50,9 @@ function tegn() {
 }
 
 function touchStarted() { // Denne funktion bruger vi til alt der har noget at gøre med at man rør skærmen
-  // Request fullscreen on first touch
-  if (document.fullscreenEnabled && !document.fullscreenElement) {
-    document.documentElement.requestFullscreen();
-  }
+  // Request fullscreen on touch if not already in fullscreen
+  requestFullscreen();
+  
   console.log("Just ran touchStarted")
   if (stage === 1) {
     

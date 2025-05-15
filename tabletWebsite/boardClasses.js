@@ -1,5 +1,4 @@
-class ChessBoard {
-  constructor(boardElementId, initialPosition = null) {
+class ChessBoard {  constructor(boardElementId, initialPosition = null) {
     this.files = 'abcdefgh';
     this.ranks = '87654321';
     this.board = document.getElementById(boardElementId);
@@ -9,9 +8,12 @@ class ChessBoard {
       a7: 'bp', b7: 'bp', c7: 'bp', d7: 'bp', e7: 'bp', f7: 'bp', g7: 'bp', h7: 'bp',
       a8: 'br', b8: 'bn', c8: 'bb', d8: 'bq', e8: 'bk', f8: 'bb', g8: 'bn', h8: 'br'
     };
+    // Store highlights to preserve them during re-renders
+    this.highlights = {};
+    // Store the last move for highlighting
+    this.lastMove = null;
     this.renderBoard();
   }
-
   renderBoard() {
     this.board.innerHTML = '';
 
@@ -50,15 +52,44 @@ class ChessBoard {
         this.board.appendChild(div);
       }
     }
+    
+    // Reapply highlights after rendering the board
+    this.reapplyHighlights();
   }
-
+  
+  // Helper method to reapply all saved highlights
+  reapplyHighlights() {
+    for (const square in this.highlights) {
+      const color = this.highlights[square];
+      const squareElement = document.getElementById(square);
+      if (squareElement) {
+        squareElement.style.backgroundColor = color;
+      }
+    }
+  }
   movePiece(from, to) {
     if (!this.position[from]) return console.warn(`No piece at ${from}`);
+    
+    // Save the move for highlighting
+    this.lastMove = { from, to };
+    
+    // Move the piece
     this.position[to] = this.position[from];
     delete this.position[from];
+    
+    // Highlight the move (will also store it in highlights)
+    this.highlightMove();
+    
+    // Render the board (will reapply all highlights)
     this.renderBoard();
   }
-
+  
+  // Helper method to highlight the last move
+  highlightMove() {
+    if (this.lastMove) {
+      this.highlightFields(this.lastMove.from, this.lastMove.to, 'red');
+    }
+  }
   highlightFields(from, to, color = 'red') {
     const fromFile = from[0].charCodeAt(0);
     const fromRank = parseInt(from[1]);
@@ -76,16 +107,20 @@ class ChessBoard {
         const squareElement = document.getElementById(square);
         if (squareElement) {
           squareElement.style.backgroundColor = color;
+          // Store highlight in our highlights object
+          this.highlights[square] = color;
         }
       }
     }
-  }
-
-  clearHighlights() {
+  }  clearHighlights() {
     const squares = this.board.getElementsByClassName('square');
     for (let square of squares) {
       square.style.backgroundColor = '';
     }
+    // Clear stored highlights
+    this.highlights = {};
+    // Clear the last move
+    this.lastMove = null;
   }
 }
 

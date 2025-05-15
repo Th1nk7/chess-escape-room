@@ -181,7 +181,7 @@ class Stages{
         text("y = x + 25",width/2,height/2-80)
         text("t = 5x - 10",width/2,height/2-60)
         text("g = 4x", width/2,height/2-40)
-        text("j = 165 - 2/x",width/2,height/2-20)
+        text("j = 165 - x/2",width/2,height/2-20)
 
         text("y + t + g + j = Summen",width/2,height/2+20)
 
@@ -284,7 +284,7 @@ class Stages{
         fill(0);
         textSize(50);
         textFont("Petit Formal Script");
-        text("Tårnets hemmelig er dens alder, som du fandt. 27", width/2, height/2-50,width-110);
+        text("Tårnets hemmelig er dens alder, som du fandt: 25", width/2, height/2-50,width-110);
         
         textFont("Times new roman")
         this.pressNextStage(100)
@@ -309,6 +309,11 @@ class Stages{
         textSize(50);
         textFont("Petit Formal Script");
         text("Escape Room Løst!", width/2, height/2,width-110);
+        textFont("Times new roman")
+        textSize(20);
+        textAlign();
+        text(`Leaderboard\n1. HOLDNAVN\n2. HOLDNAVN\n3. HOLDNAVN`, width/2, height/2 + 100);
+        
     }
 
 

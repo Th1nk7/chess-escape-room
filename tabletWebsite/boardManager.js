@@ -153,16 +153,6 @@ client.on('message', function (topic, message) {
                     hintCounter = 0;
                 }
             }
-            else {
-                alert("Starter forfra");
-                chessboard.board.position = { a8: 'wr' };
-                chessboard.board.renderBoard();
-                chessboard.lastPos = 'a8';
-                // Remove all trails and red markings
-                chessboard.trail = ['a8'];
-                chessboard.board.clearHighlights();
-                chessboard.nextSensor = [32,33,13,26,4,5,14,22,27,25,15,23];
-            }
         }
     }
 });
@@ -178,17 +168,16 @@ function initChessboard(scenario, callback) {
 
     if (scenario === 1) {
         // Show scenario 1 board with the correct positions
-        document.getElementById("chessboard").classList.add("shown");
         chessboard = Node;
         chessboard.callback = callback;
         chessboard.scenario = 1;
         chessboard.board = new ChessBoard('chessboard', {
-            f8: 'wr', // White rook
-            g8: 'wk', // White king
-            g4: 'wn', // White knight
-            a1: 'bk', // Black king
-            b1: 'br', // Black rook
-            b2: 'bp'  // Black pawn
+            f8: 'br', // White rook
+            g8: 'bk', // White king
+            g4: 'bn', // White knight
+            a1: 'wk', // Black king
+            b1: 'wr', // Black rook
+            b2: 'wp'  // Black pawn
         });
         chessboard.lastPos = null;
         return;
@@ -198,10 +187,14 @@ function initChessboard(scenario, callback) {
         chessboard.scenario = 2;
         chessboard.nextSensor = [32,33,13,26,4,5,14,22,27,25,15,23];
         document.getElementById("chessboard").classList.add("shown");
-        chessboard.board = new ChessBoard('chessboard', { a8: 'wr' });
+        chessboard.board = new ChessBoard('chessboard', { a8: 'br' });
         chessboard.lastPos = "a8";
         chessboard.trail = ['a8'];
         addResetButton();
+        let div = document.getElementById('chessboard');
+            if (div) {
+                div.style.display = 'grid'; // Hide the chessboard
+            }
         return;
     } else if (scenario === 3){
         chessboard = Node;
