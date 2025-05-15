@@ -147,6 +147,16 @@ client.on('message', function (topic, message) {
                     hintCounter = 0;
                 }
             }
+            else {
+                alert("Starter forfra");
+                chessboard.board.position = { a8: 'wr' };
+                chessboard.board.renderBoard();
+                chessboard.lastPos = 'a8';
+                // Remove all trails and red markings
+                chessboard.trail = ['a8'];
+                chessboard.board.clearHighlights();
+                chessboard.nextSensor = [32,33,13,26,4,5,14,22,27,25,15,23];
+            }
         }
     }
 });
