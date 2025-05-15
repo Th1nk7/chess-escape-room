@@ -246,6 +246,7 @@ class Stages{
             stage = 13;
             tegn();
         });
+
     }
 
     stage13(){
