@@ -120,7 +120,7 @@ class Stages{
         fill(0);
         textSize(50);
         textFont("Petit Formal Script");
-        text("Kan du bevæge dig som den brik du lige har rykket? *Her* ville være et godt sted at starte.", width/2, height/2-50,width-110);
+        text("Kan du bevæge dig som den brik du lige har rykket? Hjørnet med sikringsskabet ville være et godt sted at starte.", width/2, height/2-50,width-110);
         textSize(20);
         textFont("Arial");
         fill(this.tekstColor);
