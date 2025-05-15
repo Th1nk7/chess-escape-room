@@ -27,7 +27,7 @@ function tegn() {
 
 function touchStarted() { // Denne funktion bruger vi til alt der har noget at gøre med at man rør skærmen
   console.log("Just ran touchStarted")
-
+  
   // Denne del er til at gå videre til næste stage, på de stages vi vil have det er muligt på
     if (
       stage === 1 ||
