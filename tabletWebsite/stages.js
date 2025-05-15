@@ -243,7 +243,7 @@ class Stages{
         textFont("Arial")
         textSize(20)
         textAlign(LEFT)
-        text("a8\nc8\nc5\na5\na2\nc2\nf2\nh2\nh5\nf5\nf8\nh8", width/2, height/2,width-110);
+        text("Følg følgende felter med dit Tårn:\nStart: a8\n.        c8\n.        c5\n.        a5\n.        a2\n.        c2\n.        f2\n.        h2\n.        h5\n.        f5\n.        f8\nSlut: h8", width/2, height/2-50,width-110);
 
         initChessboard(2, () => {
             stage = 13;
