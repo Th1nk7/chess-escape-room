@@ -16,13 +16,15 @@ canvas {
   grid-template-rows: repeat(8, 48px);
   width: 384px;
   height: 384px;
-  margin: 20px auto;
+  margin: 0;
   border: 2px solid black;
   z-index: 4;
-  display: hidden;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
-#chessboard {
+#chessboard.shown {
   display: grid;
 }
 
@@ -106,3 +108,4 @@ canvas {
 .rank-label, .file-label {
   color: rgba(0, 0, 0, 0.8); /* Increased alpha for better visibility */
 }
+

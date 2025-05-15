@@ -240,7 +240,7 @@ class Stages{
         fill(0);
         textSize(30);
         textFont("Petit Formal Script");
-        text("Kan du følge mønsteret?", width/2, height/8,width-110);
+        text("Kan du følge mønsteret? Brug det fysiske board", width/2, height/8,width-110);
         textFont("Arial")
         textSize(20)
         textAlign(LEFT)
