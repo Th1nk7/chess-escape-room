@@ -20,8 +20,8 @@ canvas {
   margin: 0;
   border: 2px solid transparent;
   z-index: 4;
-  top: 80%;
-  left: 87%;
+  top: 50%;
+  left: 50%;
   transform: translate(-50%, -50%);
 }
 
