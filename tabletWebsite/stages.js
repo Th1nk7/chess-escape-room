@@ -240,7 +240,10 @@ class Stages{
         fill(0);
         textSize(50);
         textFont("Petit Formal Script");
-        text("GÅDE 4", width/2, height/2,width-110);
+        textFont("Arial")
+        textSize(20)
+        textAlign(LEFT)
+        text("a8\nc8\nc5\na5\na2\nc2\nf2\nh2\nh5\nf5\nf8\nh8", width/2, height/2,width-110);
 
         initChessboard(2, () => {
             stage = 13;

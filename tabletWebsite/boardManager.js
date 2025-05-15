@@ -23,13 +23,13 @@ client.on('message', function (topic, message) {
     if (chessboard && chessboard.scenario === 1) {
         console.log("Scenario 1")
         // Scenario 1: Checkmate in 1 move
-        const code = message.split(":")[0].toLowerCase();
+        let code = message.split(":")[0].toLowerCase();
         if (code === "32") {
             chessboard.callback();
             chessboard = null;
             return;
         } else {
-            const hintCodes = ["26", "13", "25", "27", "4", "5", "14", "22"];
+            let hintCodes = ["26", "13", "25", "27", "4", "5", "14", "22"];
             if (hintCodes.includes(code)) {
                 if (hintCounter < 10) {
                     console.log("Incrementing hint counter");
@@ -41,31 +41,28 @@ client.on('message', function (topic, message) {
                 }
             }
         }
+// const chessBoard = new ChessBoard('chessboard');
+// chessBoard.movePiece('e2', 'e4');
+// chessBoard.highlightFields('e2', 'e4', 'yellow');
+// chessBoard.highlightFields('e7', 'e5', 'blue');
+// chessBoard.clearHighlights();
     } else if (chessboard && chessboard.scenario === 2) {
         console.log("Scenario 2")
         // Scenario 2: Pattern formed after moving pieces
-        // FUNCTIONALITY HERE
+        let code = message.split(":")[0].toLowerCase();
+        if (Number(code) === chessboard.nextSensor[0]) {
+            chessboard.nextSensor.pop(chessboard.nextSensor[0]);
+            if (chessboard.nextSensor.length === 0) {
+                chessboard.callback();
+                chessboard = null;
+                return;
+            }
+        }
+
     } else if (chessboard && chessboard.scenario === 3) {
         console.log("Scenario 3")
         // Scenario 3: Return magnet
-        const code = message.split(":")[0].toLowerCase();
-        if (code === "27") {
-            chessboard.callback();
-            chessboard = null;
-            return;
-        } else {
-            const hintCodes = ["26", "13", "25", "32", "4", "5", "14", "22"];
-            if (hintCodes.includes(code)) {
-                if (hintCounter < 3) {
-                    console.log("Incrementing hint counter");
-                    hintCounter++;
-                } else {
-                    alert("Hint: Du startede på f8 (det kunne du måske godt huske)");
-                    console.log("Hint: Du startede på f8 (det kunne du måske godt huske)");
-                    hintCounter = 0;
-                }
-            }
-        }
+        
     }
 });
 
@@ -87,12 +84,10 @@ function initChessboard(scenario, callback) {
         chessboard = Node;
         chessboard.callback = callback;
         chessboard.scenario = 2;
-        chessboard.sensorsTriggered = [
-            [0, 0, 0, 0],
-            [0, 0, 0, 0],
-            [0, 0, 0, 0],
-            [0, 0, 0, 0]
-        ];
+        chessboard.nextSensor = [32,33,13,26,4,5,14,22,27,25,15,23]
+        document.getElementById("chessboard").hidden = false;
+        chessboard.board = new ChessBoard('chessboard', { a8: 'wr' });
+        
         return;
     } else if (scenario === 3){
         chessboard = Node;

@@ -8,3 +8,96 @@ html, body {
 canvas {
   display: block;
 }
+
+#chessboard {
+  position: absolute;
+  display: grid;
+  grid-template-columns: repeat(8, 48px);
+  grid-template-rows: repeat(8, 48px);
+  width: 384px;
+  height: 384px;
+  margin: 20px auto;
+  border: 2px solid black;
+  z-index: 4;
+}
+
+.square {
+  width: 48px;
+  height: 48px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+.square-label {
+  position: absolute;
+  font-size: 10px;
+  font-weight: bold;
+  color: rgba(0, 0, 0, 0.6);
+  pointer-events: none;
+}
+
+/* Position file labels at the bottom */
+.square-label:only-child {
+  bottom: 2px;
+  left: 2px;
+}
+
+/* Position rank labels on the h file */
+.square-label:not(:only-child) {
+  top: 2px;
+  right: 2px;
+}
+
+.light { background: #f0d9b5; }
+.dark  { background: #b58863; }
+
+.piece {
+  width: 44px;
+  height: 44px;
+  image-rendering: pixelated;
+  user-select: none;
+  pointer-events: none;
+}
+
+.board-container {
+  display: grid;
+  grid-template-columns: 24px auto;
+  grid-template-rows: 24px auto;
+}
+
+.file-row {
+  grid-column: 2;
+  display: grid;
+  grid-template-columns: repeat(8, 48px);
+}
+
+.file-label {
+  position: absolute;
+  font-size: 10px;
+  font-weight: bold;
+  color: rgba(0, 0, 0, 0.6);
+  bottom: 2px;
+  left: 2px;
+  pointer-events: none;
+}
+
+.rank-row {
+  display: grid;
+  grid-template-columns: repeat(8, 48px);
+}
+
+.rank-label {
+  position: absolute;
+  font-size: 10px;
+  font-weight: bold;
+  color: rgba(0, 0, 0, 0.6);
+  top: 2px;
+  right: 2px;
+  pointer-events: none;
+}
+
+.rank-label, .file-label {
+  color: rgba(0, 0, 0, 0.8); /* Increased alpha for better visibility */
+}
