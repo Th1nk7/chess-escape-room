@@ -17,7 +17,7 @@ canvas {
   width: 384px;
   height: 384px;
   margin: 0;
-  border: 2px solid black;
+  border: 2px solid transparent;
   z-index: 4;
   top: 50%;
   left: 50%;
@@ -26,6 +26,7 @@ canvas {
 
 #chessboard.shown {
   display: grid;
+  border-color:black;
 }
 
 .square {
