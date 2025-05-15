@@ -1,5 +1,6 @@
 var client = mqtt.connect('wss://mqtt.nextservices.dk/');
 let chessboard = null;
+let hintCounter = 0;
 
 client.on('connect', function () {
     console.log('connected');
@@ -14,22 +15,38 @@ client.on('connect', function () {
 });
 
 client.on('message', function (topic, message) {
+    if (topic !== 'chessEscaperoom') {
+        return;
+    }
     message = message.toString();
-    console.log("Message received: ", message);
+    console.log("Message received: " + message);
     if (chessboard && chessboard.scenario === 1) {
-        console.log("Scernario 1")
-        /*if(message == "Scernario 1"){
-            chessboard.callback
-            
-        }*/
+        console.log("Scenario 1")
         // Scenario 1: Checkmate in 1 move
-        // FUNCTIONLITY HERE
+        const code = message.split(":")[0].toLowerCase();
+        if (code === "32") {
+            chessboard.callback();
+            chessboard = null;
+            return;
+        } else {
+            const hintCodes = ["26", "13", "25", "27", "4", "5", "14", "22"];
+            if (hintCodes.includes(code)) {
+                if (hintCounter < 10) {
+                    console.log("Incrementing hint counter");
+                    hintCounter++;
+                } else {
+                    alert("Hint: Du startede på f8 (det kunne du måske godt huske)");
+                    console.log("Hint: Du startede på f8 (det kunne du måske godt huske)");
+                    hintCounter = 0;
+                }
+            }
+        }
     } else if (chessboard && chessboard.scenario === 2) {
-        console.log("Scernario 2")
+        console.log("Scenario 2")
         // Scenario 2: Pattern formed after moving pieces
-        // FUNCTIONLITY HERE
+        // FUNCTIONALITY HERE
     } else if (chessboard && chessboard.scenario === 3) {
-        console.log("Scernario 3")
+        console.log("Scenario 3")
         // Scenario 3: Return magnet
         // FUNCTIONLITY HERE
     }
@@ -45,12 +62,12 @@ function initChessboard(scenario, callback) {
     }
 
     if (scenario === 1) {
-        chessboard = null;
+        chessboard = Node;
         chessboard.callback = callback;
         chessboard.scenario = 1;
         return;
     } else if (scenario === 2){
-        chessboard = null;
+        chessboard = Node;
         chessboard.callback = callback;
         chessboard.scenario = 2;
         chessboard.sensorsTriggered = [

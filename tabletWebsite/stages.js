@@ -2,7 +2,7 @@ class Stages{
 
     constructor(){
         this.rigtigForkertTekst = ""
-        this.tekstColor = [0,0,0]
+        this.tekstColor = color(0,0,0)
         this.timeOut = false
 
         //Laver et input felt 
@@ -65,7 +65,7 @@ class Stages{
         fill(0);
         textSize(50);
         textFont("Petit Formal Script");
-        text("Den, der løser Tårnets fire prøver, vil kende sandheden og åbne det, som aldrig burde åbnes.", width/2, height/2-100, width-110);
+        text("Den, der løser Tårnets fire prøver, vil kende sandheden og åbne det, der aldrig bør åbnes.", width/2, height/2-100, width-110);
         
         textFont("Times new roman")
         this.pressNextStage(150)
@@ -78,11 +78,12 @@ class Stages{
         fill(0);
         textSize(50);
         textFont("Petit Formal Script");
-        text("Nu er rummet tilrådighed. Vis dit hvær og lav skakmat.", width/2, height/2,width-110);
+        text("Nu er rummet til rådighed. Vis dit værd, og lav skakmat.", width/2, height/2,width-110);
 
         
         initChessboard(1, () => {
-            stage++
+            stage = 4;
+            tegn();
         });
     }
 
@@ -106,7 +107,7 @@ class Stages{
         fill(0);
         textSize(50);
         textFont("Petit Formal Script");
-        text("Løsningen til næste gåde ligger i at vide hvordan brikkerne rykker sig.", width/2, height/2,width-110);
+        text("Løsningen til den næste gåde kræver viden om, hvordan brikkerne rykker sig.", width/2, height/2,width-110);
 
         textFont("Times new roman")
         this.pressNextStage(150)
@@ -119,17 +120,13 @@ class Stages{
         fill(0);
         textSize(50);
         textFont("Petit Formal Script");
-        text("Kan du bevæge dig som den brik du lige har rykket? *Her* ville være et godt sted og starte.", width/2, height/2-50,width-110);
+        text("Kan du bevæge dig som den brik du lige har rykket? *Her* ville være et godt sted at starte.", width/2, height/2-50,width-110);
+        textSize(20);
+        textFont("Arial");
+        fill(this.tekstColor);
+        text(this.rigtigForkertTekst,width/2,height-100);
 
-        textSize(20)
-        textFont("Arial")
-        fill(this.tekstColor[0],this.tekstColor[1],this.tekstColor[2])
-        text(this.rigtigForkertTekst,width/2,height-100)
 
-        
-            
-        
-       
         if(!this.timeOut){
 
             this.inputFelt.show()
@@ -192,7 +189,7 @@ class Stages{
 
         textSize(20)
         textFont("Arial")
-        fill(this.tekstColor[0],this.tekstColor[1],this.tekstColor[2])
+        fill(this.tekstColor)
         text(this.rigtigForkertTekst,width/2,height-100)
 
             
@@ -245,7 +242,10 @@ class Stages{
         textFont("Petit Formal Script");
         text("GÅDE 4", width/2, height/2,width-110);
 
-        //Her er Gåde 4, aka. mønster gåden
+        initChessboard(2, () => {
+            stage = 13;
+            tegn();
+        });
     }
 
     stage13(){
@@ -281,9 +281,8 @@ class Stages{
         fill(0);
         textSize(50);
         textFont("Petit Formal Script");
-        text("Nu skal du bare sætte startbrikken tilbage", width/2, height/2,width-110);
-        
-        initChessboard(3,() => stage++)
+        text("Nu skal brikken hjem igen, ryk den venligst tilbage til startpositionen", width/2, height/2,width-110);
+        initChessboard(3,() => {stage = 16; tegn();});
     }
 
     stage16(){
@@ -304,35 +303,35 @@ class Stages{
         //Stage 6 (Gåde 2)
         if (userAnswer === "275" && stage === 6) { // === korrekt svar
             console.log("Rigtigt svar!");
-            this.tekstColor = [0,255,0]
-            this.rigtigForkertTekst = "Rigtigt svar!"
-            tegn()
-            textAlign(CENTER)
-            this.submitButton.hide()
+            this.tekstColor = color(0,255,0);
+            this.rigtigForkertTekst = "Rigtigt svar!";
+            tegn();
+            textAlign(CENTER);
+            this.submitButton.hide();
             this.inputFelt.hide();
             if(this.timeOut == false){
             this.timeOut = setTimeout(() => {
                 this.rigtigForkertTekst = ""
                 this.timeOut = false;
-                stage++;
-                tegn()
+                stage = 7;
+                tegn();
             }, 3000);
         }
         } else if(stage === 6){
             console.log("Forkert svar, prøv igen.");
-            this.tekstColor = [255,0,0]
-            this.rigtigForkertTekst = "Forkert svar, prøv igen."
-            tegn()
-            textAlign(CENTER)
-            this.submitButton.hide()
-            this.inputFelt.hide()
+            this.tekstColor = color(255,0,0);
+            this.rigtigForkertTekst = "Forkert svar, prøv igen.";
+            tegn();
+            textAlign(CENTER);
+            this.submitButton.hide();
+            this.inputFelt.hide();
             if(this.timeOut == false){
             this.timeOut = setTimeout(() => {
                 this.rigtigForkertTekst = "";
                 this.timeOut = false;
-                this.submitButton.show()
-                this.inputFelt.show()
-                tegn()
+                this.submitButton.show();
+                this.inputFelt.show();
+                tegn();
             }, 3000);
             }
         }
@@ -341,35 +340,35 @@ class Stages{
         //Stage 9 (Gåde 3)
         if (userAnswer === "10" && stage === 9) { // === korrekt svar
             console.log("Rigtigt svar!");
-            this.tekstColor = [0,255,0]
-            this.rigtigForkertTekst = "Rigtigt svar!"
-            tegn()
-            textAlign(CENTER)
-            this.submitButton.hide()
+            this.tekstColor = color(0,255,0);
+            this.rigtigForkertTekst = "Rigtigt svar!";
+            tegn();
+            textAlign(CENTER);
+            this.submitButton.hide();
             this.inputFelt.hide();
             if(this.timeOut == false){
             this.timeOut = setTimeout(() => {
                 this.rigtigForkertTekst = ""
                 this.timeOut = false;
-                stage++;
-                tegn()
+                stage = 10;
+                tegn();
             }, 3000);
         }
         } else if(stage === 9){
             console.log("Forkert svar, prøv igen.");
-            this.tekstColor = [255,0,0]
-            this.rigtigForkertTekst = "Forkert svar, prøv igen."
-            tegn()
-            textAlign(CENTER)
-            this.submitButton.hide()
-            this.inputFelt.hide()
+            this.tekstColor = color(255,0,0);
+            this.rigtigForkertTekst = "Forkert svar, prøv igen.";
+            tegn();
+            textAlign(CENTER);
+            this.submitButton.hide();
+            this.inputFelt.hide();
             if(this.timeOut == false){
             this.timeOut = setTimeout(() => {
                 this.rigtigForkertTekst = "";
                 this.timeOut = false;
-                this.submitButton.show()
-                this.inputFelt.show()
-                tegn()
+                this.submitButton.show();
+                this.inputFelt.show();
+                tegn();
             }, 3000);
             }
         }
