@@ -19,6 +19,11 @@ canvas {
   margin: 20px auto;
   border: 2px solid black;
   z-index: 4;
+  display: hidden;
+}
+
+#chessboard {
+  display: grid;
 }
 
 .square {
