@@ -238,8 +238,9 @@ class Stages{
 
         textAlign(CENTER);
         fill(0);
-        textSize(50);
+        textSize(30);
         textFont("Petit Formal Script");
+        text("Kan du følge mønsteret?", width/2, height/8,width-110);
         textFont("Arial")
         textSize(20)
         textAlign(LEFT)
