@@ -38,8 +38,9 @@ function addResetButton() {
                 chessboard.board.position = { a8: 'wr' };
                 chessboard.board.renderBoard();
                 chessboard.lastPos = 'a8';
-                // Remove all trails
+                // Remove all trails and red markings
                 chessboard.trail = ['a8'];
+                chessboard.board.clearHighlights();
             }
         };
         document.body.appendChild(btn);
@@ -92,18 +93,37 @@ client.on('message', function (topic, message) {
         if (!square) return;
         let from = chessboard.lastPos;
         let to = square;
+        if (from === to) {
+            // Do nothing if moving to the same position
+            return;
+        }
         if (isRookMove(from, to)) {
-            // Draw trail only if move is valid
-            if (!chessboard.trail) chessboard.trail = [from];
-            if (!chessboard.trail.includes(to)) chessboard.trail.push(to);
             // Move rook
             chessboard.board.movePiece(from, to);
             chessboard.lastPos = to;
-            // Highlight trail
-            chessboard.board.clearHighlights();
-            for (let sq of chessboard.trail) {
-                let el = document.getElementById(sq);
-                if (el) el.style.backgroundColor = 'red';
+            // Highlight straight line from 'from' to 'to' (add to previous markings, do not clear)
+            let fromFile = from[0].charCodeAt(0);
+            let fromRank = parseInt(from[1]);
+            let toFile = to[0].charCodeAt(0);
+            let toRank = parseInt(to[1]);
+            if (fromFile === toFile) {
+                // Same file, vertical move
+                let minRank = Math.min(fromRank, toRank);
+                let maxRank = Math.max(fromRank, toRank);
+                for (let rank = minRank; rank <= maxRank; rank++) {
+                    let sq = String.fromCharCode(fromFile) + rank;
+                    let el = document.getElementById(sq);
+                    if (el) el.style.backgroundColor = 'red';
+                }
+            } else if (fromRank === toRank) {
+                // Same rank, horizontal move
+                let minFile = Math.min(fromFile, toFile);
+                let maxFile = Math.max(fromFile, toFile);
+                for (let file = minFile; file <= maxFile; file++) {
+                    let sq = String.fromCharCode(file) + fromRank;
+                    let el = document.getElementById(sq);
+                    if (el) el.style.backgroundColor = 'red';
+                }
             }
         }
         // else: ignore diagonal move, do not color
@@ -111,7 +131,7 @@ client.on('message', function (topic, message) {
         console.log("Scenario 3")
         // Scenario 3: Return magnet
         const code = message.split(":")[0].toLowerCase();
-        if (code === "27") {
+        if (code === "15") {
             chessboard.callback();
             chessboard = null;
             return;
@@ -150,7 +170,7 @@ function initChessboard(scenario, callback) {
         chessboard.callback = callback;
         chessboard.scenario = 2;
         chessboard.nextSensor = [32,33,13,26,4,5,14,22,27,25,15,23];
-        document.getElementById("chessboard").hidden = false;
+        document.getElementById("chessboard").addClass('shown');
         chessboard.board = new ChessBoard('chessboard', { a8: 'wr' });
         chessboard.lastPos = "a8";
         chessboard.trail = ['a8'];
