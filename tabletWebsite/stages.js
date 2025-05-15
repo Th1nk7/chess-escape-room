@@ -130,12 +130,12 @@ class Stages{
         if(!this.timeOut){
 
             this.inputFelt.show()
-            this.inputFelt.position(width / 2 - 100, height / 2 + 150); // Adjust position
+            this.inputFelt.position(width / 2 - 100, height-80); // Adjust position
             this.inputFelt.size(200); // Set size of the input field
             this.inputFelt.attribute("placeholder", "Skriv dit svar her"); // Add placeholder text
 
             this.submitButton.show()
-            this.submitButton.position(width / 2 - 50, height / 2 + 180);
+            this.submitButton.position(width / 2 - 50, height-40);
             this.inputFelt.value('')
         }
     }
@@ -197,12 +197,12 @@ class Stages{
        
         if(!this.timeOut){
             this.inputFelt.show()
-            this.inputFelt.position(width / 2, height / 2 + 150); // Adjust position
+            this.inputFelt.position(width / 2, height-80); // Adjust position
             this.inputFelt.size(30); // Set size of the input field
             this.inputFelt.attribute("placeholder", "?"); // Add placeholder text
 
             this.submitButton.show()
-            this.submitButton.position(width / 2 - 50, height / 2 + 180);
+            this.submitButton.position(width / 2 - 50, height-40);
             this.inputFelt.value('')
         }
     }
@@ -253,12 +253,12 @@ class Stages{
 
         if(!this.timeOut){
             this.inputFelt.show()
-            this.inputFelt.position(width / 2- 50, height / 2 + 220); // Adjust position
+            this.inputFelt.position(width / 2- 50, height-80); // Adjust position
             this.inputFelt.size(60); // Set size of the input field
             this.inputFelt.attribute("placeholder", "Mønster"); // Add placeholder text
 
             this.submitButton.show()
-            this.submitButton.position(width / 2 - 50, height / 2 + 250);
+            this.submitButton.position(width / 2 - 50, height-40);
             this.inputFelt.value('')
         }
 
