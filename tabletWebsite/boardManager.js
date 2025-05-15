@@ -70,6 +70,9 @@ client.on('message', function (topic, message) {
         // Scenario 1: Checkmate in 1 move
         let code = message.split(":")[0].toLowerCase();
         if (code === "32") {
+            // Remove scenario 1 board before callback
+            document.getElementById("chessboard").classList.remove("shown");
+            if (chessboard.board && chessboard.board.destroy) chessboard.board.destroy();
             chessboard.callback();
             chessboard = null;
             return;
@@ -171,9 +174,20 @@ function initChessboard(scenario, callback) {
     }
 
     if (scenario === 1) {
+        // Show scenario 1 board with the correct positions
+        document.getElementById("chessboard").classList.add("shown");
         chessboard = Node;
         chessboard.callback = callback;
         chessboard.scenario = 1;
+        chessboard.board = new ChessBoard('chessboard', {
+            a8: 'wr', // White rook
+            g8: 'wk', // White king
+            g4: 'wn', // White knight
+            a1: 'bk', // Black king
+            b1: 'br', // Black rook
+            b2: 'bp'  // Black pawn
+        });
+        chessboard.lastPos = null;
         return;
     } else if (scenario === 2){
         chessboard = Node;
