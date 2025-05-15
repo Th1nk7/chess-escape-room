@@ -70,8 +70,11 @@ client.on('message', function (topic, message) {
         // Scenario 1: Checkmate in 1 move
         let code = message.split(":")[0].toLowerCase();
         if (code === "32") {
-            // Remove scenario 1 board before callback
-            document.getElementById("chessboard").classList.remove("shown");
+            // Hide scenario 1 board by setting its display to 'none'
+            let div = document.getElementById('chessboard');
+            if (div) {
+                div.style.display = 'none'; // Hide the chessboard
+            }
             if (chessboard.board && chessboard.board.destroy) chessboard.board.destroy();
             chessboard.callback();
             chessboard = null;
@@ -180,7 +183,7 @@ function initChessboard(scenario, callback) {
         chessboard.callback = callback;
         chessboard.scenario = 1;
         chessboard.board = new ChessBoard('chessboard', {
-            a8: 'wr', // White rook
+            f8: 'wr', // White rook
             g8: 'wk', // White king
             g4: 'wn', // White knight
             a1: 'bk', // Black king
