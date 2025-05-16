@@ -35,7 +35,7 @@ function addResetButton() {
         btn.onclick = function() {
             if (chessboard && chessboard.scenario === 2) {
                 // Reset board to only rook on a8
-                chessboard.board.position = { a8: 'wr' };
+                chessboard.board.position = { a8: 'br' };
                 chessboard.board.renderBoard();
                 chessboard.lastPos = 'a8';
                 // Remove all trails and red markings
@@ -172,12 +172,12 @@ function initChessboard(scenario, callback) {
         chessboard.callback = callback;
         chessboard.scenario = 1;
         chessboard.board = new ChessBoard('chessboard', {
-            f8: 'br', // White rook
-            g8: 'bk', // White king
-            g4: 'bn', // White knight
-            a1: 'wk', // Black king
-            b1: 'wr', // Black rook
-            b2: 'wp'  // Black pawn
+            f8: 'br', // Black rook
+            g8: 'bk', // Black king
+            g4: 'bn', // Black knight
+            a1: 'wk', // White king
+            b1: 'wr', // White rook
+            b2: 'wp'  // White pawn
         });
         chessboard.lastPos = null;
         return;
