@@ -35,7 +35,6 @@ function requestFullscreen() {
 function tegn() {
   background(220);
 
-  // Du er velkommen til at beholde det gamle, hvis du foretrækker det. Tak tobi, og nej
   if (stage && stage <= 16 && stage > 0) {
     classStage[`stage${stage}`]();
   } else {
